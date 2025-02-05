@@ -22,8 +22,7 @@ public class InputHandler : MonoBehaviour
         if (hit.collider != null)
         {
             Debug.Log(hit.collider.gameObject.name);
-
-            // Если объект имеет интерфейс IInteractable, вызываем метод
+            
             if (hit.transform.TryGetComponent(out IInteractable interactable))
             {
                 interactable.OnTap();

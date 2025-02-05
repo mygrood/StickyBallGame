@@ -4,9 +4,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
-    
+    [SerializeField] private Rope rope;
+
     private Rigidbody2D rb;
-    private Vector2 moveDirection = Vector2.up;
+    private static Vector2 moveDirection = Vector2.up;
+    private StickyBall currentStickyBall;
 
     private bool isAttached = false;
 
@@ -14,7 +16,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    
+
     private void FixedUpdate()
     {
         MovePlayer();
@@ -26,10 +28,32 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = moveDirection * moveSpeed;
         }
+        else
+        {
+            Vector2 direction = (currentStickyBall.GetPosition() - transform.position).normalized;
+            rb.velocity = direction * moveSpeed;
+            rope.UpdateRope(transform.position, currentStickyBall.GetPosition());
+        }
     }
 
-    public void AttachToStickySphere(StickyBall stickyBall)
+    public void HandleStickyInteraction(StickyBall stickyBall)
     {
-        throw new System.NotImplementedException();
+        if (currentStickyBall == stickyBall)
+        {
+            rope.Detach();
+            currentStickyBall = null;
+            isAttached = false;
+        }
+        else
+        {
+            if (currentStickyBall != null)
+            {
+                rope.Detach();
+            }
+
+            currentStickyBall = stickyBall;
+            rope.Attach(transform.position, currentStickyBall.GetPosition());
+            isAttached = true;
+        }
     }
 }
