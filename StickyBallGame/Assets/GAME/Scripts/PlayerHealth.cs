@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
    private void Die()
-    {
-        Debug.Log("Player has died.");
-    }
+   {
+       GameManager.Instance.GameOver();
+   }
 }

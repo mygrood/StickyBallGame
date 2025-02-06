@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private float startY;
     
     public event Action<int> OnScoreChanged;
+    public event Action<int,int> OnGameOver;
     
     private void Awake()
     {
@@ -31,5 +32,11 @@ public class GameManager : MonoBehaviour
         float currentY = player.transform.position.y;
         Score = Mathf.RoundToInt(currentY-startY);
         OnScoreChanged?.Invoke(Score);
+    }
+
+    public void GameOver()
+    {
+        OnGameOver?.Invoke(Score, Score);
+        Time.timeScale = 0;
     }
 }
