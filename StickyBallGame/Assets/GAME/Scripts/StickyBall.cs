@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class StickyBall : MonoBehaviour, IInteractable
@@ -5,7 +6,12 @@ public class StickyBall : MonoBehaviour, IInteractable
     [SerializeField] private PlayerController playerController;
     public Vector3 GetPosition() => transform.position;
 
-    public void Initialize(PlayerController player)
+    private void Start()
+    {
+        Initialize(GameManager.Instance.player.GetComponent<PlayerController>());
+    }
+
+    private void Initialize(PlayerController player)
     {
         playerController = player;
     }
