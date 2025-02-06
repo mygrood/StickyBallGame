@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class HealthUI : MonoBehaviour
 {
+    [SerializeField] private Transform healthBar;
     [SerializeField] private GameObject heartPrefab;
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite emptyHeart;
@@ -25,7 +26,7 @@ public class HealthUI : MonoBehaviour
         hearts = new Image[maxHealth];
         for (int i = 0; i < maxHealth; i++)
         {
-            GameObject heartObject = Instantiate(heartPrefab, transform);
+            GameObject heartObject = Instantiate(heartPrefab, healthBar);
             hearts[i] = heartObject.GetComponent<Image>();
         }
         UpdateUI(playerHealth.СurrentHealth);

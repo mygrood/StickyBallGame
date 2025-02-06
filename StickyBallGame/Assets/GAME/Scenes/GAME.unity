@@ -522,7 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20fdfc4479e242ee829f8db6999b7afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 15
+  maxHealth: 7
 --- !u!1001 &201069310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -646,6 +646,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 386759986}
+  - component: {fileID: 386759987}
+  - component: {fileID: 386759988}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -669,6 +671,35 @@ Transform:
   - {fileID: 773376382}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &386759987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386759985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56888253b5334a5081f6393201338d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 404961030}
+  heartPrefab: {fileID: 7984555326474107015, guid: afa80d5913fdc784d83e83c3ac269f7f, type: 3}
+  fullHeart: {fileID: 21300000, guid: dee3e7a326bd99842aff70384f8d7c0d, type: 3}
+  emptyHeart: {fileID: 21300000, guid: f1d05fb6b4751b346ad9f34c9152baab, type: 3}
+--- !u!114 &386759988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386759985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67b04033a1d44a059aed5f212b1b6eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 144083977}
 --- !u!1 &404961029
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,7 +710,6 @@ GameObject:
   m_Component:
   - component: {fileID: 404961030}
   - component: {fileID: 404961032}
-  - component: {fileID: 404961031}
   m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
@@ -706,21 +736,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 121}
   m_SizeDelta: {x: -40, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &404961031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 404961029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56888253b5334a5081f6393201338d76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heartPrefab: {fileID: 7984555326474107015, guid: afa80d5913fdc784d83e83c3ac269f7f, type: 3}
-  fullHeart: {fileID: 21300000, guid: dee3e7a326bd99842aff70384f8d7c0d, type: 3}
-  emptyHeart: {fileID: 21300000, guid: f1d05fb6b4751b346ad9f34c9152baab, type: 3}
 --- !u!114 &404961032
 MonoBehaviour:
   m_ObjectHideFlags: 0
