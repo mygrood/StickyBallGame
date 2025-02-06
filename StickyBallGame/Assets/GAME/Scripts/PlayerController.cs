@@ -26,12 +26,12 @@ public class PlayerController : MonoBehaviour
     {
         if (!isAttached)
         {
-            rb.velocity = moveDirection * moveSpeed;
+            if (rb.velocity.magnitude < moveSpeed) rb.AddForce(moveDirection * moveSpeed, ForceMode2D.Force);
         }
         else
         {
             Vector2 direction = (currentStickyBall.GetPosition() - transform.position).normalized;
-            rb.velocity = direction * moveSpeed;
+            rb.velocity = direction * moveSpeed; 
             rope.UpdateRope(transform.position, currentStickyBall.GetPosition());
         }
     }
