@@ -2,19 +2,21 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIManager : MonoBehaviour
+public class GameUIManager: MonoBehaviour
 {
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TMP_Text gameOverScoreText;
     [SerializeField] private TMP_Text gameoverHighScoreText;
-
+    [SerializeField] private GameObject pausePanel;
+    
     private void Start()
     {
         GameManager.Instance.OnScoreChanged += UpdateScoreText;
         GameManager.Instance.OnGameOver += ShowGameOver;
 
         gameOverPanel.SetActive(false);
+        pausePanel.SetActive(false);
     }
 
     private void ShowGameOver(int score, int highScore)
@@ -34,4 +36,16 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("MENU"); 
+    }
+
+    public void TogglePause()
+    {
+        GameManager.Instance.isPaused = !GameManager.Instance.isPaused;
+        pausePanel.SetActive(GameManager.Instance.isPaused);
+    }
+    
 }

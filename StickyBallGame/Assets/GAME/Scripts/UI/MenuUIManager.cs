@@ -1,0 +1,61 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
+
+public class MenuUIManager : MonoBehaviour
+{
+    [SerializeField] private TopPanelAnimation settingsPanelAnimation;
+    [SerializeField] private Image soundButtonImage;
+    [SerializeField] private Sprite soundOnSprite;
+    [SerializeField] private Sprite soundOffSprite;
+
+
+    [SerializeField] private TopPanelAnimation highScorePanelAnimation;
+    [SerializeField] private TMP_Text highScoreText;
+   
+    
+    public void ToggleSettings()
+    {
+        
+        if (settingsPanelAnimation != null)
+        {
+            if (settingsPanelAnimation.IsOpen)
+                settingsPanelAnimation.Close();
+            else
+                settingsPanelAnimation.Open();
+        }
+    }
+
+    public void ToggleHighScore()
+    {
+        if (highScorePanelAnimation != null)
+        {
+            if (highScorePanelAnimation.IsOpen)
+            {
+                highScorePanelAnimation.Close();
+            }
+            else
+            {
+                highScorePanelAnimation.Open();
+                highScoreText.text = "Highscore: "+GetHighScore().ToString(); 
+            }
+        }
+       
+    }
+
+    public void ToggleSoundButton()
+    {
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("GAME");
+    }
+
+    private int GetHighScore()
+    {
+       return PlayerPrefs.GetInt("HighScore");
+    }
+}

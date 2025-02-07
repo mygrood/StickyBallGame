@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BackgroundScroller : MonoBehaviour
 {
-    [SerializeField] private BackgroundSegment[] segments; // 2-3 сегмента фона
+    [SerializeField] private BackgroundSegment[] segments; 
     [SerializeField] private Transform player;
     
     private float segmentHeight;

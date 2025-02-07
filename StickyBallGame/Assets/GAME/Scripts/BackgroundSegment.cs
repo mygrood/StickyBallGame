@@ -8,7 +8,7 @@ public class BackgroundSegment : MonoBehaviour
     [SerializeField] private GameObject[] objectPrefabs;
     [SerializeField] private int[] objectWeights;
     [SerializeField] private int objectCount = 3;
-
+    
     private List<GameObject> spawnedObjects = new List<GameObject>();
     private SpriteRenderer spriteRenderer;
     private void Awake()
@@ -83,9 +83,8 @@ public class BackgroundSegment : MonoBehaviour
 
     private Vector3 GetFreePosition(Vector3 position)
     {
-        float checkRadius =2f; 
-        
-        while (Physics2D.OverlapCircle(position, checkRadius) != null)
+        float spawnDistance = 3f;
+        while (Physics2D.OverlapCircle(position, spawnDistance) != null)
         {
             position = GetRandomPosition();
         }
