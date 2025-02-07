@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             Vector2 direction = (currentStickyBall.GetPosition() - transform.position).normalized;
-            rb.velocity = direction * moveSpeed; 
+            rb.velocity = Vector2.ClampMagnitude(direction * moveSpeed, moveSpeed);
             rope.UpdateRope(transform.position, currentStickyBall.GetPosition());
         }
     }
@@ -54,8 +54,7 @@ public class PlayerController : MonoBehaviour
             currentStickyBall = stickyBall;
             rope.Attach(transform.position, currentStickyBall.GetPosition());
             isAttached = true;
-            
-            
+
         }
     }
 }

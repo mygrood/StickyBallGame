@@ -28,9 +28,5 @@ public class InputHandler : MonoBehaviour
                 interactable.OnTap();
             }
         }
-        else
-        {
-            Debug.Log("Ray did not hit any object.");
-        }
     }
 }
