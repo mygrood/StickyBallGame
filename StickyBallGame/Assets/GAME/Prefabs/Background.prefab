@@ -105,6 +105,7 @@ MonoBehaviour:
   - {fileID: 3540974108590238717, guid: 1139d135f2986184d9539990bcd1b4b5, type: 3}
   objectWeights: 0a0000000600000002000000
   objectCount: 8
+  spawnDistance: 2.4
 --- !u!1 &6709447399403766583
 GameObject:
   m_ObjectHideFlags: 0

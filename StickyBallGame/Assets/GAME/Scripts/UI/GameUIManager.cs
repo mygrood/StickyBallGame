@@ -44,8 +44,8 @@ public class GameUIManager: MonoBehaviour
 
     public void TogglePause()
     {
-        GameManager.Instance.isPaused = !GameManager.Instance.isPaused;
-        pausePanel.SetActive(GameManager.Instance.isPaused);
+        GameManager.Instance.IsPaused = !GameManager.Instance.IsPaused;
+        pausePanel.SetActive(GameManager.Instance.IsPaused);
     }
     
 }

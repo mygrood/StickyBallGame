@@ -8,6 +8,7 @@ public class BackgroundSegment : MonoBehaviour
     [SerializeField] private GameObject[] objectPrefabs;
     [SerializeField] private int[] objectWeights;
     [SerializeField] private int objectCount = 3;
+    [SerializeField] private float spawnDistance = 3f;
     
     private List<GameObject> spawnedObjects = new List<GameObject>();
     private SpriteRenderer spriteRenderer;
@@ -83,10 +84,18 @@ public class BackgroundSegment : MonoBehaviour
 
     private Vector3 GetFreePosition(Vector3 position)
     {
-        float spawnDistance = 3f;
+        int maxAttempts = 50; 
+        int attempts = 0;
+
         while (Physics2D.OverlapCircle(position, spawnDistance) != null)
         {
             position = GetRandomPosition();
+            attempts++;
+            if (attempts >= maxAttempts)
+            {
+                Debug.LogWarning("Не удалось найти свободное место для объекта!");
+                break;
+            }
         }
         return position;
     }

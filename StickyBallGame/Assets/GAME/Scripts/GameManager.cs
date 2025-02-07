@@ -6,9 +6,20 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public GameObject player;
-    public bool isPaused = false;
     
-    private int Score = 0;
+    private bool _isPaused = false;
+    public bool IsPaused
+    {
+        get => _isPaused;
+        set
+        {
+            _isPaused = value;
+            UpdateTimeScale();
+        }
+    }
+    public bool IsGameOver { get; private set; } = false;
+    
+    private int score = 0;
     private float startY;
     
     public event Action<int> OnScoreChanged;
@@ -17,7 +28,22 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
     }
 
     private void Start()
@@ -25,31 +51,33 @@ public class GameManager : MonoBehaviour
         startY = player.transform.position.y;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
+        if (player == null || IsGameOver) return;
+
         UpdateScore();
-        if (isPaused)
-        {
-            Time.timeScale = 0;
-        }
-        else
-        {
-            Time.timeScale = 1; 
-        }
+    }
+
+    private void UpdateTimeScale()
+    {
+        Time.timeScale = (IsPaused || IsGameOver) ? 0 : 1;
     }
 
     private void UpdateScore()
     {
         float currentY = player.transform.position.y;
-        Score = Mathf.RoundToInt(currentY - startY);
-        OnScoreChanged?.Invoke(Score);
+        score = Mathf.RoundToInt(currentY - startY);
+        OnScoreChanged?.Invoke(score);
     }
 
     public void GameOver()
     {
-        Time.timeScale = 0;
-        SetHighScore(Score);
-        OnGameOver?.Invoke(Score, GetHighScore());
+        if (IsGameOver) return;
+
+        IsGameOver = true;
+        SetHighScore(score);
+        OnGameOver?.Invoke(score, GetHighScore());
+        UpdateTimeScale();
     }
 
     private int GetHighScore()
@@ -60,6 +88,10 @@ public class GameManager : MonoBehaviour
     private void SetHighScore(int score)
     {
         int highScore = GetHighScore();
-        if (score > highScore) PlayerPrefs.SetInt("HighScore", score);
+        if (score > highScore)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            PlayerPrefs.Save(); 
+        }
     }
 }

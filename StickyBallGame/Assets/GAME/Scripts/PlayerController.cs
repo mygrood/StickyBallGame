@@ -54,6 +54,8 @@ public class PlayerController : MonoBehaviour
             currentStickyBall = stickyBall;
             rope.Attach(transform.position, currentStickyBall.GetPosition());
             isAttached = true;
+            
+            
         }
     }
 }
