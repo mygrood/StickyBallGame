@@ -18,6 +18,7 @@ public class MenuUIManager : MonoBehaviour
     private void Start()
     {
         SoundManager.Instance.SetMenuMusic();
+        Time.timeScale = 1f;
     }
     
     public void ToggleSettings()
