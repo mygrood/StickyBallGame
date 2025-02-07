@@ -94,4 +94,8 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.Save(); 
         }
     }
+    public void StartGame()
+    {
+        IsPaused = false; 
+    }
 }
