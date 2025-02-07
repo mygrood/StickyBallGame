@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            SoundManager.Instance.PlaySoundEffect(0);
             if (currentStickyBall != null)
             {
                 rope.Detach();

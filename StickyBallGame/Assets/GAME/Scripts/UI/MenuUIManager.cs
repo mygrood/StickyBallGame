@@ -14,7 +14,11 @@ public class MenuUIManager : MonoBehaviour
 
     [SerializeField] private TopPanelAnimation highScorePanelAnimation;
     [SerializeField] private TMP_Text highScoreText;
-   
+
+    private void Start()
+    {
+        SoundManager.Instance.SetMenuMusic();
+    }
     
     public void ToggleSettings()
     {
@@ -47,6 +51,9 @@ public class MenuUIManager : MonoBehaviour
 
     public void ToggleSoundButton()
     {
+        SoundManager.Instance.ToggleSound();
+        bool isSoundOn = PlayerPrefs.GetInt("SoundOn", 1) == 1;
+        soundButtonImage.sprite = isSoundOn ? soundOnSprite : soundOffSprite;
     }
 
     public void StartGame()

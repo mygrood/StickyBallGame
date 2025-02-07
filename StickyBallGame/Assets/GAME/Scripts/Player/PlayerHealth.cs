@@ -22,6 +22,7 @@ public class PlayerHealth : MonoBehaviour
         СurrentHealth = Mathf.Clamp(СurrentHealth - damage, 0, maxHealth);
         OnHealthChanged?.Invoke(СurrentHealth);
         playerAnimation.TakeDamage();
+        SoundManager.Instance.PlaySoundEffect(1);
         if (IsDead)
         {
             Die();
@@ -35,6 +36,7 @@ public class PlayerHealth : MonoBehaviour
             СurrentHealth = Mathf.Clamp(СurrentHealth + amount, 0, maxHealth);
             OnHealthChanged?.Invoke(СurrentHealth);
             playerAnimation.Heal();  
+            SoundManager.Instance.PlaySoundEffect(2);
         }
     }
 

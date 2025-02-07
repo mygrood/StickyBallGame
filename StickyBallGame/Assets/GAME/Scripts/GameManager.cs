@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        SoundManager.Instance.SetGameMusic();
         startY = player.transform.position.y;
     }
 
@@ -73,7 +74,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         if (IsGameOver) return;
-
+        
+        SoundManager.Instance.SetGameOverMusic();
         IsGameOver = true;
         SetHighScore(score);
         OnGameOver?.Invoke(score, GetHighScore());
