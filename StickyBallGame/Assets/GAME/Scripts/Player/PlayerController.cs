@@ -5,9 +5,11 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private Rope rope;
-
-    private Rigidbody2D rb;
+    
     private static Vector2 moveDirection = Vector2.up;
+    private Rigidbody2D rb;
+    private PlayerAnimation playerAnimation;
+    
     private StickyBall currentStickyBall;
 
     private bool isAttached = false;
@@ -15,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerAnimation = GetComponent<PlayerAnimation>();
     }
 
     private void FixedUpdate()
@@ -54,7 +57,7 @@ public class PlayerController : MonoBehaviour
             currentStickyBall = stickyBall;
             rope.Attach(transform.position, currentStickyBall.GetPosition());
             isAttached = true;
-
+            playerAnimation.AttachRope(currentStickyBall.GetPosition());
         }
     }
 }

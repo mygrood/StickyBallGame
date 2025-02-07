@@ -7,17 +7,21 @@ public class PlayerHealth : MonoBehaviour
     public int MaxHealth { get { return maxHealth; } }
     public int СurrentHealth { get; private set; }
     public bool IsDead => СurrentHealth <= 0;
+    
+     private PlayerAnimation playerAnimation;
 
     public event Action<int> OnHealthChanged;
     private void Awake()
     {
         СurrentHealth = maxHealth;
+        playerAnimation = GetComponent<PlayerAnimation>();
     }
    
     public void TakeDamage(int damage)
     {
         СurrentHealth = Mathf.Clamp(СurrentHealth - damage, 0, maxHealth);
         OnHealthChanged?.Invoke(СurrentHealth);
+        playerAnimation.TakeDamage();
         if (IsDead)
         {
             Die();
@@ -26,8 +30,12 @@ public class PlayerHealth : MonoBehaviour
   
     public void Heal(int amount)
     {
-        СurrentHealth = Mathf.Clamp(СurrentHealth +amount, 0, maxHealth);
-        OnHealthChanged?.Invoke(СurrentHealth);
+        if (СurrentHealth < maxHealth) 
+        {
+            СurrentHealth = Mathf.Clamp(СurrentHealth + amount, 0, maxHealth);
+            OnHealthChanged?.Invoke(СurrentHealth);
+            playerAnimation.Heal();  
+        }
     }
 
    private void Die()
