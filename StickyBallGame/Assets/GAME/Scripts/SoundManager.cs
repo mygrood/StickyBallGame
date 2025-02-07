@@ -28,8 +28,18 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
         }
         
-        isSoundOn = PlayerPrefs.GetInt("SoundOn") == 1;
+        if (!PlayerPrefs.HasKey("SoundOn"))
+        {
+            PlayerPrefs.SetInt("SoundOn", 1);
+            isSoundOn = true;
+            PlayerPrefs.Save();
+        }
+        else
+        {
+            isSoundOn = PlayerPrefs.GetInt("SoundOn") == 1 ? true : false;
+        }
         UpdateAudioSettings();
+       
     }
 
     public void SetGameMusic()
@@ -70,4 +80,5 @@ public class SoundManager : MonoBehaviour
         musicSource.mute = !isSoundOn;
         effectSource.mute = !isSoundOn;
     }
+    
 }

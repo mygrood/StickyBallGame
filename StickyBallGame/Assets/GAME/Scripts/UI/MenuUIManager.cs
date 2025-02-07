@@ -29,6 +29,9 @@ public class MenuUIManager : MonoBehaviour
                 settingsPanelAnimation.Close();
             else
                 settingsPanelAnimation.Open();
+            
+            bool isSoundOn = PlayerPrefs.GetInt("SoundOn", 1) == 1;
+            soundButtonImage.sprite = isSoundOn ? soundOnSprite : soundOffSprite;
         }
     }
 
@@ -52,10 +55,14 @@ public class MenuUIManager : MonoBehaviour
     public void ToggleSoundButton()
     {
         SoundManager.Instance.ToggleSound();
+        UpdateSoundButtonImage();
+    }
+
+    private void UpdateSoundButtonImage()
+    {
         bool isSoundOn = PlayerPrefs.GetInt("SoundOn", 1) == 1;
         soundButtonImage.sprite = isSoundOn ? soundOnSprite : soundOffSprite;
     }
-
     public void StartGame()
     {
         SceneManager.LoadScene("GAME");
